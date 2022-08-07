@@ -19,12 +19,20 @@ thwart or minimize the attackÔÇÖs intensity and damage to the OT systems.
 Further, the tool should have in-built dashboard facility to display logs/reports to help the
 admin in carrying out diagnosis.
 
-DNP3 Protocol
 protocal is a language in which computer systems talk with each other.
-DNP3 is one such protocal
+types of protocols given to us -> modbus, IEC101,DNP3
 
-Master stations will be able to pull information form other devicies and put it on a screen.
-rtu,iu,
+we are using modbus prot as its a newer protocal compared to DNP3 and its easier to use compared to DNP3
 
+so where are these protocols used in the industry?
+Anywhere where we have to read and write data to and from the devices to control and monitor
+their activities
 
+for ex: an industrial system using pumps to control water level in their plant, use different sensors to
+monitor the level of water so in this case the water pump and the sensor can be connected
+to systems different systems which are connected to a comman center(say Master station). The master station controls the
+water pump and the sensor readings, these i/o signals are sent on protocols like modbus, IEC101, DNP3.
+
+Master stations are a key component in OT system. As Master stations are able to pull information from other devicies and put
+it on a screen for managing Operations.
 
