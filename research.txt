@@ -8,10 +8,11 @@ outgoing traffic for any deviations in behaviour in the OT ecosystem. If a threa
 detected, alarms are to be sent to security admins warning them about the suspicious traffic.
 AI and ML can be used to build lightweight endpoint detection technologies. This can be an indispensable
 solution, especially in situations where OT devices lack the processing power and need behavior-based
-detection capabilities that aren't as resource intensive. Problem Statement ÔÇ£Build AI based tool
-to help discover devices and hidden patterns while processing large amounts of real-time pipeline
-operational data (Industrial protocols such as DNP 3.0, Modbus, IEC 101). The tool should help in
-monitoring incoming and outgoing traffic for any deviations in behaviour in the OT ecosystem.
+detection capabilities that aren't as resource intensive.
+
+Problem Statement ÔÇ£Build AI based tool to help discover devices and hidden patterns while processing
+large amounts of real-time pipeline operational data (Industrial protocols such as DNP 3.0, Modbus, IEC 101).
+The tool should help in monitoring incoming and outgoing traffic for any deviations in behaviour in the OT ecosystem.
 If threat or anomaly is detected, alarms should be sent to security admin warning them about the
 suspicious traffic. The tool should also suggest corrective actions/steps to be taken in order to
 thwart or minimize the attackÔÇÖs intensity and damage to the OT systems.
