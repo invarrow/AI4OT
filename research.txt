@@ -1,0 +1,29 @@
+#THEME BACKGROUND:
+
+In addition to size and scope, OT networks involve myriad types of devices connecting to
+their networks. Signature-based cybersecurity solutions are unlikely to deliver the requisite performance
+to detect new attack vectors (zero-day exploits). Artificial Intelligence can help discover devices and
+hidden patterns while processing large amounts of data. Machine Learning can help monitor incoming and
+outgoing traffic for any deviations in behaviour in the OT ecosystem. If a threat or anomaly is
+detected, alarms are to be sent to security admins warning them about the suspicious traffic.
+AI and ML can be used to build lightweight endpoint detection technologies. This can be an indispensable
+solution, especially in situations where OT devices lack the processing power and need behavior-based
+detection capabilities that aren't as resource intensive. Problem Statement ÔÇ£Build AI based tool
+to help discover devices and hidden patterns while processing large amounts of real-time pipeline
+operational data (Industrial protocols such as DNP 3.0, Modbus, IEC 101). The tool should help in
+monitoring incoming and outgoing traffic for any deviations in behaviour in the OT ecosystem.
+If threat or anomaly is detected, alarms should be sent to security admin warning them about the
+suspicious traffic. The tool should also suggest corrective actions/steps to be taken in order to
+thwart or minimize the attackÔÇÖs intensity and damage to the OT systems.
+Further, the tool should have in-built dashboard facility to display logs/reports to help the
+admin in carrying out diagnosis.
+
+DNP3 Protocol
+protocal is a language in which computer systems talk with each other.
+DNP3 is one such protocal
+
+Master stations will be able to pull information form other devicies and put it on a screen.
+rtu,iu,
+
+
+
