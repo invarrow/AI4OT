@@ -36,3 +36,6 @@ water pump and the sensor readings, these i/o signals are sent on protocols like
 Master stations are a key component in OT system. As Master stations are able to pull information from other devicies and put
 it on a screen for managing Operations.
 
+
+danda reeeeeeeeeeeeeeeeeeeeeeeeeeeee
+
