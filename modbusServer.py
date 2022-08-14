@@ -1,25 +1,32 @@
-from audioop import add
+import argparse
+import logging
 from pyModbusTCP.server import ModbusServer, DataBank
-from time import sleep
-from random import uniform
 
-# Create an instance of ModbusServer
-server = ModbusServer("127.0.0.1", 12345,no_block=True)
-try:
-    print("Start server...")
+
+class MyDataBank(DataBank):
+    """A custom ModbusServerDataBank for override on_xxx_change methods."""
+
+    def on_coils_change(self, address, from_value, to_value, srv_info):
+        """Call by server when change occur on coils space."""
+        msg = 'change in coil space [{0!r:^5} > {1!r:^5}] at @ 0x{2:04X} from ip: {3:<15}'
+        msg = msg.format(from_value, to_value, address, srv_info.client.address)
+        logging.info(msg)
+
+    def on_holding_registers_change(self, address, from_value, to_value, srv_info):
+        """Call by server when change occur on holding registers space."""
+        msg = 'change in hreg space [{0!r:^5} > {1!r:^5}] at @ 0x{2:04X} from ip: {3:<15}'
+        msg = msg.format(from_value, to_value, address, srv_info.client.address)
+        logging.info(msg)
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-H', '--host', type=str, default='localhost', help='Host (default: localhost)')
+    parser.add_argument('-p', '--port', type=int, default=502, help='TCP port (default: 502)')
+    args = parser.parse_args()
+    # logging setup
+    logging.basicConfig(format='%(asctime)s %(message)s', level=logging.INFO)
+    # init modbus server and start it
+    server = ModbusServer(host=args.host, port=args.port, data_bank=MyDataBank())
     server.start()
-    print("Server is online")
-    state = [0]
-    db=DataBank()
 
-    db.set_holding_registers(address=40001,word_list=[int(uniform(0, 100))])
-    while True:
-        if state != db.get_holding_registers(address=40001):
-            state = db.get_holding_registers(address=40001)
-            print("Value of Register 1 has changed to " +str(state))
-        sleep(0.5)
-
-except:
-    print("Shutdown server ...")
-    server.stop()
-    print("Server is offline")
