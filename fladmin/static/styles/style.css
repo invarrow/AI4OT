@@ -1,0 +1,28 @@
+*{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 40px;
+    margin: 0%;
+}
+#header{
+    background-color: rgb(51, 20, 137);
+    color: beige;
+    
+}
+#result{
+    color: rgb(176, 176, 243);
+    background-color: black;
+    padding: 10px;
+    border-radius: 10px;
+    width:100%;
+  
+    
+}
+.container{
+    grid-column: 2/3;
+    display: grid;
+    grid-template-columns: 230px auto;
+}
+.notifs{
+    background-color:rgb(58, 24, 106);
+    color: antiquewhite;
+}
