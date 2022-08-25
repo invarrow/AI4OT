@@ -1,36 +1,55 @@
 <!doctype html>
-<title>jQuery Example</title>
+<title>OT Dashboard</title>
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css')}}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Noto+Sans+TC:wght@500&family=Orbitron&family=Rampart+One&display=swap"
+    rel="stylesheet">
 <script type="text/javascript"
   src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <script type="text/javascript">
   var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
 </script>
-<script type ="text/javascript" >
-document.addEventListener('DOMContentLoaded', function() {
-  var button = document.createElement('button');
-  button.type = 'button';
-  button.innerHTML = 'Press me';
-  button.className = 'btn-styled';
 
-  button.onclick = function() {
-      // …
-  };
 
-  var container = document.getElementById('container');
-  container.appendChild(button);
-}, false);</script>
 <script type="text/javascript">
+  
 var intervalID = setInterval(update_values,1000);
-
+  function dataClussing(data){
+    dataClus = '';
+    arLen = data.length;
+    for(var i=0;i<arLen;i++){
+      dataClus = dataClus.concat("<br>",data[i]);
+    return dataClus;
+    }
+  }
   function update_values() {
-        $.getJSON($SCRIPT_ROOT + '/_stuff',
+    const getJSON  = async url => {
+      const response = await fetch(url);
+      return response.json();
+
+    }
+    console.log("fetchin data....")
+    getJSON("http://127.0.0.1:5000/_stuff").then(data=>{
+      
+      // dataClus = dataClus.concat('hhh<br>',JSON.stringify(data.result));
+      
+      document.getElementById("result").innerHTML = JSON.stringify(data.result);
+      console.log(data.result);
+    });
+      //   $.getJSON($SCRIPT_ROOT + '/_stuff')
                
-      function(data) {
-        $('#result').text(data.result);
-        console.log(data)
-      });
+      // .done($SCIRPT_ROOT,function(data) {
+      //   console.log(data.users[3].namea);
+      //   $('#result').text(data.users[3].name);
+        
+      // });
+
+
       
     };
+
     function stopTextColor() {
       clearInterval(intervalID);
     }
@@ -38,12 +57,13 @@ var intervalID = setInterval(update_values,1000);
     
 </script>
 <body onload="update_values();">
-<h1>Dynamic Update</h1>
-<p>
-    <span id="result">?</span>
+<h1 id="header">OT DASHBOARD</h1>
+<div class="container">
+    <div class="notifs">Notifs</div><div id="result">?</div>
 <script>
 document.getElementById("result").innerHTML;
 </script>
+</div>
 
 	<button onclick="stopTextColor();">Stop</button>
 	</body>
