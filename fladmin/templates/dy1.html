@@ -10,14 +10,27 @@
 var intervalID = setInterval(update_values,1000);
 
   function update_values() {
-        $.getJSON($SCRIPT_ROOT + '/_stuff',
+    const getJSON  = async url => {
+      const response = await fetch(url);
+      return response.json();
+
+    }
+    console.log("fetchin data....")
+    getJSON("http://127.0.0.1:5000/_stuff").then(data=>{
+      var dataObj = data.result;
+      console.log(Object.keys(dataObj)[0]);
+    });
+      //   $.getJSON($SCRIPT_ROOT + '/_stuff')
                
-      function(data) {
-        $('#result').text(data.result);
-        console.log(data)
-      });
+      // .done($SCIRPT_ROOT,function(data) {
+      //   console.log(data.users[3].namea);
+      //   $('#result').text(data.users[3].name);
+        
+      // });
+
       
     };
+
     function stopTextColor() {
       clearInterval(intervalID);
     }
