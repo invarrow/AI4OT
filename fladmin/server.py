@@ -4,7 +4,7 @@ import webbrowser
 import time,csv
 app = Flask(__name__)
 bigrow = []
-f= open(r"C:\Users\rashe\OneDrive\Desktop\otHack\AI4OT\dataset.csv")
+f= open(r"C:\Users\Abdul Rasheed\Desktop\AI4OT\fladmin\dataset.csv")
 csvreader = csv.reader(f)
 
 @app.route('/_stuff', methods = ['GET'])
