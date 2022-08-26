@@ -8,6 +8,7 @@ from time import sleep
 import numpy as np
 import joblib
 import asyncio
+import threading
 import pandas as pd
 app = Flask(__name__)
 bigrow = []
@@ -37,7 +38,7 @@ def write_dat(row):
                 rt =client.write_single_register(row,int(df.iloc[0,row]))
 
                 return rt
-                # print(rt)
+                # print(rt)s
             except:
                 pass
         else:
@@ -56,7 +57,7 @@ def stuff():
         
         
         bigrow.append(dfObj)    
-        return jsonify(result=bigrow,nothing = write_dat())
+        return jsonify(result=bigrow,nothing = write_dat(row))
 
 
 @app.route('/')
