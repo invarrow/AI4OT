@@ -17,7 +17,7 @@ f = open('dataset1.csv','r')
 csvreader = csv.reader(f)
 wdth,height = 1500,800
 
-FPS = 30
+FPS = 10
 
 #Colors
 WHITE = (255, 255, 255)
@@ -57,7 +57,7 @@ print(con_y)
 dt = [4,3,46,2.68965569,12356,0]
 dts = ['address','function','length','system mode','control scheme','pump']
 
-model = joblib.load('bruno.joblib')
+model = joblib.load('bruno1.joblib')
 client = ModbusClient('localhost',port = 502)
 
 data = pd.read_csv('dataset1.csv')
@@ -65,9 +65,9 @@ data = pd.read_csv('dataset1.csv')
 df = pd.DataFrame(data)
 print(df)
 
-df.columns = ['address','function','length','setpoint','gain','reset rate','deadband','cycle time','rate','system mode','control scheme','pump','solenoid','pressure measurement','crc rate','command response','time','binary result','categorized result','specific result']
+df.columns = ['address','function','length','setpoint','gain','reset rate','deadband','cycle time', 'rate', 'system mode', 'control scheme','pump','solenoid','pressure measurement','crc rate','command response','time','binary result','categorized result','specific result']
 df = df.replace('?',-1)
-df = df.drop(columns = ['time','binary result','categorized result','specific result'])
+df = df.drop(columns = ['setpoint','gain','reset rate','deadband','cycle time','rate','system mode','time','binary result','categorized result','specific result'])
 
 for row in range(0,df.size):
     #print(df.iloc[row])
@@ -76,7 +76,7 @@ for row in range(0,df.size):
     print(r)
     pred = model.predict(r)
     print(pred)
-    if pred!=[1]:
+    if pred==[0]:
         
         try:
             rt =client.write_single_register(row,int(df.iloc[row]))
@@ -92,6 +92,25 @@ alert = None
 log = open("log.txt","w")
 index = 0
 while running:
+    if index>=df.size:
+        running = False
+
+    r = pd.DataFrame([df.iloc[index]])
+    print(r)
+    pred = model.predict(r)
+    print(pred)
+    if pred==[0]:
+        
+        try:
+            rt =client.write_single_register(index,df.iloc[index])
+            
+            # print(rt)
+        except:
+            pass
+    else:
+        break
+
+
     for line in csvreader:
         log.write(str(line)+"\n")
         break
@@ -125,7 +144,8 @@ while running:
     pygame.draw.rect(dis,BLACK,(250,height-240,con_w,con_h),2)
 
     for y in con_y:
-        blit_text(line,(0,0,0),con_x,y)
+        blit_text(str(line),(0,0,0),con_x,y)
+
         
     mouse = pygame.mouse.get_pos()
 
@@ -163,7 +183,7 @@ while running:
     dis.blit(logimg,(lx+10,ly+20))
     dis.blit(cautionimg,(ax+10,ay+17))
     if alert!=None:
-        blit_text(f"'{dts[count]}' is suspected to have anomaly with value '{i}'",RED,ax-705,ay+105)
+        blit_text(f"'{dts[count]}' is suspected to have anomaly with value '{i}'",RED,ax+105,ay+105)
     else:
         print(alert)
 
