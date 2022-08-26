@@ -8,12 +8,10 @@ import pandas as pd
 model = joblib.load('bruno.joblib')
 client = ModbusClient('localhost',port = 502)
 
-file = open('dataset.csv','r')
-csvreader = csv.reader(file)
-newrow = []
-data = pd.read_csv('dataset.csv')
+data = pd.read_csv('dataset1.csv')
+
 df = pd.DataFrame(data)
-    
+print(df)
 
 df.columns = ['address','function','length','setpoint','gain','reset rate','deadband','cycle time','rate','system mode','control scheme','pump','solenoid','pressure measurement','crc rate','command response','time','binary result','categorized result','specific result']
 df = df.replace('?',-1)
@@ -21,7 +19,9 @@ df = df.drop(columns = ['time','binary result','categorized result','specific re
 
 for row in range(0,df.size):
     #print(df.iloc[row])
+
     r = pd.DataFrame([df.iloc[row]])
+    print(r)
     pred = model.predict(r)
     
     if pred!=[1]:
