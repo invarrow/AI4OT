@@ -108,8 +108,10 @@ while running:
         except:
             pass
     else:
-        break
-
+        liss = ["Normal","NRMI","CMRI","MSCI","MPCI","MFCI","DOS","Recon"]
+        print(f"{liss[int(pred)]} is the type of attack, Use this for diagnosis")
+        # alert = f"{liss[int(pred)]} is the type of attack, Use this for diagnosis"
+        # blit_text(f"{liss[int(pred)]} is the type of attack, Use this for diagnosis",BLACK,250,10)
 
     for line in csvreader:
         log.write(str(line)+"\n")
@@ -183,13 +185,14 @@ while running:
     dis.blit(logimg,(lx+10,ly+20))
     dis.blit(cautionimg,(ax+10,ay+17))
     if alert!=None:
-        blit_text(f"'{dts[count]}' is suspected to have anomaly with value '{i}'",RED,ax+105,ay+105)
+        blit_text(alert,RED,ax+255,ay+35)
     else:
         print(alert)
 
     pygame.display.update()
     clock.tick(FPS)
     index+=1
+    # time.sleep()
     
 pygame.quit()
             
